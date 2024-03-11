@@ -19,7 +19,7 @@ public class LibrarySystem {
         books.add(new Book(title, authorName));
     }
 
-    public void addBookWithTitleAndAuthorList(String title, List<Author> authors) throws EmptyAuthorListException {
+    public void addBookWithTitleAndAuthorList(String title, List<Author> authors) throws EmptyAuthorListException{
         books.add(new Book(title, authors));
     }
     
@@ -49,48 +49,21 @@ public class LibrarySystem {
         throw new UserOrBookDoesNotExistException("The user with the name " + name + " does not exist in the library system.");
     }
 
-    public void borrowBook(User user, Book book) throws UserOrBookDoesNotExistException {
-        if(users.indexOf(user) < 0){
-            throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " does not exist in the library system.");
-        }
-        if(books.indexOf(book) < 0){
-            throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " does not exist in the library system.");
-        }
+    public void borrowBook(User user, Book book){
         Lending lending = new Lending(user, book);
-        for (Lending lend : lendings) {
-            if (lend.getBook().equals(book)) {
-                throw new UserOrBookDoesNotExistException( "The book with the title " + book.getTitle() + " has already been borrowed.");
-            }
-        }
         lendings.add(lending);
         
     }
 
-    public void extendLending(FacultyMember facultyMember, Book book, LocalDate newDueDate) throws UserOrBookDoesNotExistException {
-        boolean isBookBorrowed = false;
+    public void extendLending(FacultyMember facultyMember, Book book, LocalDate newDueDate){
         for (Lending lending : lendings) {
             if (lending.getBook().equals(book)) {
                 lending.setDueDate(newDueDate);
-                isBookBorrowed = true;
-            }
-        }
-        if (!isBookBorrowed) {
-            if(books.indexOf(book) < 0) {
-                throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " does not exist in the library system.");
-            }
-            else {
-                throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " has not been borrowed yet.");
             }
         }
     }
 
-    public void returnBook(User user, Book book) throws UserOrBookDoesNotExistException {
-        if(users.indexOf(user) < 0){
-            throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " does not exist in the library system.");
-        }
-        if(books.indexOf(book) < 0){
-            throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " does not exist in the library system.");
-        }
+    public void returnBook(User user, Book book){
         lendings.remove(new Lending(user, book));
     }
 }
