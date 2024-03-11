@@ -49,10 +49,19 @@ public class LibrarySystem {
         throw new UserOrBookDoesNotExistException("The user with the name " + name + " does not exist in the library system.");
     }
 
-    public void borrowBook(User user, Book book){
-        Lending lending = new Lending(book,user);
-        lendings.add(lending);
-        
+    public void borrowBook(User user, Book book) throws UserOrBookDoesNotExistException {
+        if(users.indexOf(user) == -1){
+            throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " does not exist in the library system.");
+        }
+        if(books.indexOf(book) == -1){
+            throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " does not exist in the library system.");
+        }
+        for (Lending lending : lendings) {
+            if (lending.getBook().equals(book)) {
+                throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " has already been borrowed.");
+            }
+        }
+        lendings.add(new Lending(book,user));
     }
 
     public void extendLending(FacultyMember facultyMember, Book book, LocalDate newDueDate) throws UserOrBookDoesNotExistException{
@@ -61,6 +70,7 @@ public class LibrarySystem {
             if (lending.getBook().equals(book)) {
                 lending.setDueDate(newDueDate);
                 doesLendingExist = true;
+                break;
             }
         }
         if(!doesLendingExist){
@@ -75,6 +85,7 @@ public class LibrarySystem {
                 int index = lendings.indexOf(lending);
                 lendings.remove(index);
                 isBookBorrowedByUser = true;
+                break;
             }
         }
         if(!isBookBorrowedByUser){
