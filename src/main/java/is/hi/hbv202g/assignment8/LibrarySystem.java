@@ -49,7 +49,7 @@ public class LibrarySystem {
         throw new UserOrBookDoesNotExistException("The user with the name " + name + " does not exist in the library system.");
     }
 
-    public void borrowBook(User user, Book book) throws Exception {
+    public void borrowBook(User user, Book book) throws UserOrBookDoesNotExistException {
         if(users.indexOf(user) < 0){
             throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " does not exist in the library system.");
         }
@@ -59,7 +59,7 @@ public class LibrarySystem {
         Lending lending = new Lending(user, book);
         for (Lending lend : lendings) {
             if (lend.getBook().equals(book)) {
-                throw new Exception( "The book with the title " + book.getTitle() + " has already been borrowed.");
+                throw new UserOrBookDoesNotExistException( "The book with the title " + book.getTitle() + " has already been borrowed.");
             }
         }
         lendings.add(lending);
