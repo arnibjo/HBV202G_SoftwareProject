@@ -50,7 +50,7 @@ public class LibrarySystem {
     }
 
     public void borrowBook(User user, Book book){
-        Lending lending = new Lending(user, book);
+        Lending lending = new Lending(book,user);
         lendings.add(lending);
         
     }
@@ -64,6 +64,6 @@ public class LibrarySystem {
     }
 
     public void returnBook(User user, Book book){
-        lendings.remove(new Lending(user, book));
+        lendings.remove(new Lending(book, user));
     }
 }

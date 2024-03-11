@@ -7,9 +7,9 @@ public class Lending {
     private Book book;
     private User user;
 
-    public Lending(User user, Book book) {
-        this.user = user;
+    public Lending(Book book, User User) {
         this.book = book;
+        this.user = user;
         dueDate = LocalDate.now().plusDays(30);
     }
 
