@@ -55,15 +55,30 @@ public class LibrarySystem {
         
     }
 
-    public void extendLending(FacultyMember facultyMember, Book book, LocalDate newDueDate){
+    public void extendLending(FacultyMember facultyMember, Book book, LocalDate newDueDate) throws UserOrBookDoesNotExistException{
+        boolean doesLendingExist = false;
         for (Lending lending : lendings) {
             if (lending.getBook().equals(book)) {
                 lending.setDueDate(newDueDate);
+                doesLendingExist = true;
             }
+        }
+        if(!doesLendingExist){
+            throw new UserOrBookDoesNotExistException("The user with the name " + facultyMember.getName() + " did not borrow the book with the title " + book.getTitle() + ".");
         }
     }
 
-    public void returnBook(User user, Book book){
-        lendings.remove(new Lending(book, user));
+    public void returnBook(User user, Book book) throws UserOrBookDoesNotExistException {
+        boolean isBookBorrowedByUser = false;
+        for (Lending lending : lendings) {
+            if (lending.getBook().equals(book) && lending.getUser().equals(user)) {
+                int index = lendings.indexOf(lending);
+                lendings.remove(index);
+                isBookBorrowedByUser = true;
+            }
+        }
+        if(!isBookBorrowedByUser){
+            throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " did not borrow the book with the title " + book.getTitle() + ".");
+        }
     }
 }
