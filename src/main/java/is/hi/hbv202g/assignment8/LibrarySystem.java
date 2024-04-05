@@ -92,4 +92,8 @@ public class LibrarySystem {
             throw new UserOrBookDoesNotExistException("The user with the name " + user.getName() + " did not borrow the book with the title " + book.getTitle() + ".");
         }
     }
+
+    public List<Book> getAllBooks() {
+        return books;
+    }
 }
