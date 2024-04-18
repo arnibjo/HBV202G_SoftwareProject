@@ -6,6 +6,14 @@ public class Lending {
     private LocalDate dueDate;
     private Book book;
     private User user;
+    private boolean extensionRequested;
+
+    public Lending(Book book, User user, boolean extensionRequested) {
+        this.book = book;
+        this.user = user;
+        this.extensionRequested = extensionRequested;
+        dueDate = LocalDate.now().plusDays(30);
+    }
 
     public Lending(Book book, User user) {
         this.book = book;
@@ -37,4 +45,12 @@ public class Lending {
         this.user = user;
     }
     
+    public boolean isExtensionRequested() {
+        return extensionRequested;
+    }
+
+    public void setExtensionRequested(boolean extensionRequested) {
+        this.extensionRequested = extensionRequested;
+    }
+
 }
