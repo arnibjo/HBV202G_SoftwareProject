@@ -8,7 +8,18 @@
     <artifactId>Assignment8</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>HBV202G Assignment8</name>
+    <name>HBV202G Project</name>
+    <description>This is a project based on the template of Assignment 8 from the course HBV202G: Software Design and Construction. The project extends the functionality of the template by implementing additional features and enhancements. It includes classes for managing a library system, such as handling users, books, and lendings. The project aims to demonstrate proficiency in software design principles, object-oriented programming, and best practices in Java development. It also serves as a practical exercise in applying design patterns and documenting code effectively.</description>
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>LICENSE</url>
+        </license>
+    </licenses>
+    <organization>
+        <name>University of Iceland</name>
+        <url>https://www.hi.is</url>
+    </organization>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -82,6 +93,40 @@
                     <mainClass>is.hi.hbv202g.assignment8.Main</mainClass>
                 </configuration>
             </plugin>
+
+            <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+                <archive>
+                    <manifest>
+                        <mainClass>is.hi.hbv202g.assignment8.Main</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+            </plugin>
+
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
+            </plugin>
+        </plugins>
+    </reporting>    
 </project>

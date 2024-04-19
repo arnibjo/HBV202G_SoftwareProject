@@ -1,13 +1,15 @@
 package is.hi.hbv202g.assignment8;
 
-import java.util.Scanner;
-
 /**
- * Hello world!
+ * Main class.
  *
  */
 public class Main
 {
+    /**
+     * Main function that starts the library system interface
+     * @param args
+     */
     public static void main( String[] args )
     {
         LibrarySystemUI lsui = new LibrarySystemUI();

@@ -1,0 +1,158 @@
+<diagram program="umletino" version="15.1"><zoom_level>5</zoom_level><element><id>UMLClass</id><coordinates><x>290</x><y>0</y><w>315</w><h>225</h></coordinates><panel_attributes>LibrarySystem
+--
+-books: List&lt;Book&gt;
+-lendings: List&lt;Lending&gt;
+-users: List&lt;User&gt;
+-loggedInUser: User
+--
++LibrarySystem(): ctor
++addFacultyMemberUser(String name, String username, String password, String department): void
++addStudentUser(String name, String username, String password): void
++login(String username, String password): void
++logout(): void
++addBookWithTitleAndNameOfSingleAuthor(String title, String authorName): void
++addBookWithTitleAndAuthorList(String title, List&lt;Author&gt; authors): void
++findBookByTitle(String title): Book
++findUserByUsername(String username): User
++borrowBook(String userName, String bookTitle): void
++extendLending(Lending lending, LocalDate newDueDate, int fee): void
++returnBook(String userName, String bookTitle): void
++getAllBooks(): List&lt;Book&gt;
++getAllLendings(): List&lt;Lending&gt;
++getLendingsByUsername(String username): List&lt;Lending&gt;
++getLendingsByExtensionRequested(boolean extensionRequested): List&lt;Lending&gt;
++getAllUsers(): List&lt;User&gt;
++getLoggedInUser(): User
++isUserLoggedIn(): boolean
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>310</x><y>285</y><w>220</w><h>140</h></coordinates><panel_attributes>Lending
+--
+-dueDate: LocalDate
+-book: Book
+-user: User
+-extensionRequested: boolean
+--
++Lending(Book book, User user, boolean extensionRequested): ctor
++getDueDate(): LocalDate
++setDueDate(LocalDate dueDate): void
++getBook(): Book
++setBook(Book book): void
++getUser(): User
++setUser(User user): void
++isExtensionRequested(): boolean
++setExtensionRequested(boolean extensionRequested): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>350</y><w>195</w><h>140</h></coordinates><panel_attributes>User{abstract}
+--
+-name: String
+-username: String
+-password: String
+-admin = false: boolean
+--
++User(String name, String username, String password): ctor
++getUsername(): String
++setUsername(String username): void
++getPassword(): String
++setPassword(String password): void
++getName(): String
++setName(String name): void
++isAdmin(): boolean
++setAdmin(boolean admin): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>100</x><y>310</y><w>145</w><h>105</h></coordinates><panel_attributes>Book
+--
+-title: String
+-authors: List&lt;Author&gt;
+--
++Book(String title, String authorName): ctor
++Book(String title, List&lt;Author&gt; authors): ctor
++getAuthors(): List&lt;Author&gt;
++setAuthors(List&lt;Author&gt; authors): void
++addAuthor(Author author): void
++getTitle(): String
++setTitle(String title): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>525</y><w>255</w><h>85</h></coordinates><panel_attributes>Student
+--
+-feePaid: boolean
+-fee = 0: int
+--
++Student(String name, String username, String password, boolean feePaid): ctor
++isFeePaid(): boolean
++setFeePaid(boolean feePaid): void
++getFee(): int
++setFee(int fee): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>105</x><y>495</y><w>115</w><h>60</h></coordinates><panel_attributes>Author
+--
+-name: String
+--
++Author(String name): ctor
++getName(): String
++setName(String name): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>545</x><y>525</y><w>290</w><h>75</h></coordinates><panel_attributes>FacultyMember
+--
+-department: String
+--
++FacultyMember(String name, String userName, String password, String department): ctor
++getDepartment(): String
++setDepartment(String department): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>215</y><w>180</w><h>35</h></coordinates><panel_attributes>EmptyAuthorListException
+--
+--
++EmptyAuthorListException(String message): ctor
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>45</x><y>105</y><w>210</w><h>35</h></coordinates><panel_attributes>UserOrBookDoesNotExistException
+--
+--
++UserOrBookDoesNotExistException(String message): ctor
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>670</x><y>30</y><w>195</w><h>225</h></coordinates><panel_attributes>LibrarySystemUI
+--
+-library: LibrarySystem
+-scanner: Scanner
+-options = { "1. Borrow a book", "2. Return a book", 
+				"3. Extend lending", "4. Request extension", 
+				"5. Pay fee", "6. Add a book", "7. Add a user", 
+				"8. List books", "9. List users", "10. Log out" }: String[]
+--
++LibrarySystemUI(): ctor
++start(): void
+-login(): void
+-sessionType(String username, String password): void
+-studentLoginSession(): void
+-facultyLoginSession(): void
+-adminLoginSession(): void
+-optionsMenu(int userType): void
+-logOut(): void
+-displayUsers(): void
+-payFee(): void
+-requestExtension(): void
+-addUser(): void
+-addBook(): void
+-borrowBook(): void
+-returnBook(): void
+-extendLending(): void
+-displayBooks(): void
++main(String[] args): void
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>485</y><w>15</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>460</y><w>210</w><h>75</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>400;10;10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>565</x><y>220</y><w>140</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;180;260;180;260;260</additional_attributes></element><element><id>Text</id><coordinates><x>700</x><y>335</y><w>25</w><h>15</h></coordinates><panel_attributes>0..n
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>660</x><y>335</y><w>35</w><h>15</h></coordinates><panel_attributes>users
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>525</x><y>355</y><w>85</w><h>15</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>150;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>355</y><w>80</w><h>15</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element><element><id>Text</id><coordinates><x>545</x><y>345</y><w>35</w><h>15</h></coordinates><panel_attributes>user
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>275</x><y>345</y><w>35</w><h>15</h></coordinates><panel_attributes>book
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>220</y><w>15</w><h>75</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Text</id><coordinates><x>550</x><y>360</y><w>15</w><h>15</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>280</x><y>360</y><w>15</w><h>15</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>415</x><y>270</y><w>25</w><h>15</h></coordinates><panel_attributes>0..n
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>380</x><y>270</y><w>35</w><h>15</h></coordinates><panel_attributes>lendings
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>155</x><y>410</y><w>15</w><h>95</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>Text</id><coordinates><x>125</x><y>480</y><w>35</w><h>15</h></coordinates><panel_attributes>authors
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>165</x><y>480</y><w>25</w><h>15</h></coordinates><panel_attributes>0..n
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>220</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>200;10;200;90;10;90;10;180</additional_attributes></element><element><id>Text</id><coordinates><x>180</x><y>295</y><w>35</w><h>15</h></coordinates><panel_attributes>books
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>220</x><y>295</y><w>25</w><h>15</h></coordinates><panel_attributes>0..n
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>135</x><y>245</y><w>40</w><h>75</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>180</y><w>160</w><h>45</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>10;70;10;20;300;20</additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>35</y><w>140</w><h>80</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;throws&gt;&gt;</panel_attributes><additional_attributes>10;140;10;20;260;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>10</x><y>65</y><w>80</w><h>15</h></coordinates><panel_attributes>java.lang.Exception</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>60</x><y>75</y><w>15</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>20</x><y>75</y><w>15</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;280</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>125</y><w>80</w><h>15</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>140;10;10;10</additional_attributes></element><element><id>Text</id><coordinates><x>615</x><y>115</y><w>35</w><h>15</h></coordinates><panel_attributes>library
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Text</id><coordinates><x>620</x><y>130</y><w>15</w><h>15</h></coordinates><panel_attributes>1
+style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element></diagram>

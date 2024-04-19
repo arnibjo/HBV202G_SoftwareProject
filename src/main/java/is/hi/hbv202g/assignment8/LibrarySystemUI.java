@@ -6,7 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Library system user interface.
+ */
 public class LibrarySystemUI {
+
     private LibrarySystem library;
     private Scanner scanner;
     private String[] options = {"1. Borrow a book", 
@@ -20,6 +24,9 @@ public class LibrarySystemUI {
                                 "9. List users", 
                                 "10. Log out"};
 
+    /**
+     * Constructs a new library system user interface.
+     */
     public LibrarySystemUI() {
         library = new LibrarySystem(); 
         scanner = new Scanner(System.in);
@@ -44,8 +51,6 @@ public class LibrarySystemUI {
     /**
      * Starts the Library System and presents the user with a menu to login or exit.
      *
-     * @param  None  No parameters needed for this function.
-     * @return       No return value for this function.
      */
     public void start() {
         System.out.println("Welcome to the Library System!");
@@ -73,8 +78,6 @@ public class LibrarySystemUI {
     /**
      * Login function for the Library System.
      *
-     * @param  None  No parameters needed for this function.
-     * @return       No return value for this function.
      */
     private void login() {
         System.out.println("Log In");
@@ -110,15 +113,13 @@ public class LibrarySystemUI {
         } catch (UserOrBookDoesNotExistException e) {
             System.out.println("Error: " + e.getMessage());
             System.out.println("Please try again.");
-            login();
+            start();
         }
     }
 
     /**
      * Executes the student login session.
-     *
-     * @param  None  No parameters needed.
-     * @return       No return value.
+     * 
      */
     private void studentLoginSession() {
         System.out.println("Welcome, " + library.getLoggedInUser().getName() + "!");
@@ -132,8 +133,6 @@ public class LibrarySystemUI {
     /**
      * Executes the faculty login session.
      *
-     * @param  None  No parameters needed.
-     * @return       No return value.
      */
     private void facultyLoginSession() {
         System.out.println("Welcome, " + library.getLoggedInUser().getName() + "!");
@@ -146,8 +145,6 @@ public class LibrarySystemUI {
     /**
      * Executes the administrator login session.
      *
-     * @param  None  No parameters needed.
-     * @return       No return value.
      */
     private void adminLoginSession() {
         System.out.println("Administator login session");
@@ -253,8 +250,6 @@ public class LibrarySystemUI {
     /**
      * Logs the user out of the system.
      *
-     * @param  None  No parameters needed.
-     * @return       No return value.
      */
     private void logOut() {
         library.logout();
@@ -265,8 +260,6 @@ public class LibrarySystemUI {
     /**
      * Displays all the users in the system.
      *
-     * @param  None  No parameters needed.
-     * @return       No return value.
      */
     private void displayUsers() {
         List<User> users = library.getAllUsers();
@@ -325,8 +318,6 @@ public class LibrarySystemUI {
     /**
      * Requests an extension for a book lending for the logged-in user.
      *
-     * @param  None
-     * @return None
      */
     private void requestExtension() {
         User user = library.getLoggedInUser();
@@ -357,8 +348,6 @@ public class LibrarySystemUI {
     /**
      * Adds a new user to the system.
      *
-     * @param  None
-     * @return None
      */
     private void addUser() {
         System.out.println("Add User");
@@ -396,8 +385,6 @@ public class LibrarySystemUI {
     /**
      * Adds a new book to the system.
      *
-     * @param  None
-     * @return None
      */
     private void addBook(){
         System.out.println("Add a book");
@@ -428,8 +415,6 @@ public class LibrarySystemUI {
     /**
      * Borrows a book from the library for the logged-in user.
      *
-     * @param  None
-     * @return None
      */
     private void borrowBook() {
         System.out.println("Borrow a book");
@@ -448,8 +433,6 @@ public class LibrarySystemUI {
     /**
      * Returns a book to the library from the logged-in user.
      *
-     * @param  None
-     * @return None
      */
     private void returnBook() {
         System.out.print("Return a book");
@@ -470,8 +453,6 @@ public class LibrarySystemUI {
     /**
      * Extends the due date of a lending.
      *
-     * @param  None
-     * @return None
      */
     private void extendLending() {
         System.out.println("Extend lending");
@@ -519,8 +500,6 @@ public class LibrarySystemUI {
     /**
      * Displays all books in the library.
      *
-     * @param  None
-     * @return None
      */
     private void displayBooks() {
         System.out.println("All books in the library:");
@@ -539,6 +518,10 @@ public class LibrarySystemUI {
         
     }
 
+    /**
+     * Main function that starts the library system interface
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         LibrarySystemUI ui = new LibrarySystemUI();
         try {

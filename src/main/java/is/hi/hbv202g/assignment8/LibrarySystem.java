@@ -4,12 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a library system.
+ */
 public class LibrarySystem {
     private List<Book> books;
     private List<Lending> lendings;
     private List<User> users;
     private User loggedInUser;
 
+    /**
+     * Constructs a new library system.
+     */
     public LibrarySystem() {
         books = new ArrayList<Book>();
         lendings = new ArrayList<Lending>();
@@ -72,30 +78,27 @@ public class LibrarySystem {
     /**
      * Logs out the current user.
      *
-     * @param  None
-     * @return None
      */
     public void logout() {
         loggedInUser = null;
     }
 
     /**
-     * Adds a new book to the system.
+     * Adds a new book to the system with a single author.
      *
      * @param  title       the title of the book
      * @param  authorName  the name of the author
-     * @throws UserOrBookDoesNotExistException if the book already exists
      */
     public void addBookWithTitleAndNameOfSingleAuthor(String title, String authorName){
         books.add(new Book(title, authorName));
     }
 
     /**
-     * Adds a new book to the system.
+     * Adds a new book to the system with multiple authors.
      *
      * @param  title       the title of the book
-     * @param  authorName  the name of the author
-     * @throws UserOrBookDoesNotExistException if the book already exists
+     * @param  authors  the name of the authors
+     * @throws EmptyAuthorListException if the list of authors is empty
      */
     public void addBookWithTitleAndAuthorList(String title, List<Author> authors) throws EmptyAuthorListException{
         books.add(new Book(title, authors));
@@ -148,7 +151,7 @@ public class LibrarySystem {
                 throw new UserOrBookDoesNotExistException("The book with the title " + book.getTitle() + " has already been borrowed.");
             }
         }
-        lendings.add(new Lending(book,user));
+        lendings.add(new Lending(book, user, false));
         if(user instanceof Student){
             ((Student) user).setFee(((Student) user).getFee() + 50);
         }
@@ -195,7 +198,7 @@ public class LibrarySystem {
 
     /**
      * Returns all books in the library.
-     * @return
+     * @return list of all books.
      */
     public List<Book> getAllBooks() {
         return books;
@@ -203,7 +206,7 @@ public class LibrarySystem {
 
     /**
      * Returns all lendings in the library.
-     * @return
+     * @return list of all lendings.
      */
     public List<Lending> getAllLendings() {
         return lendings;
@@ -211,9 +214,9 @@ public class LibrarySystem {
 
     /**
      * Returns all lendings by a specific user.
-     * @param username
-     * @return
-     * @throws UserOrBookDoesNotExistException
+     * @param username the username of the user
+     * @return list of all lendings by a specific user.
+     * @throws UserOrBookDoesNotExistException if the user with the username does not exist.
      */
     public List<Lending> getLendingsByUsername(String username) throws UserOrBookDoesNotExistException {
         User user = findUserByUsername(username);
@@ -228,8 +231,8 @@ public class LibrarySystem {
 
     /**
      * Returns all lendings that have an extension requested(true) or not(false).
-     * @param extensionRequested
-     * @return
+     * @param extensionRequested true if the extension is requested.
+     * @return list of all lendings with a specific extension status.
      */
     public List<Lending> getLendingsByExtensionRequested(boolean extensionRequested) {
         List<Lending> extensionList = new ArrayList<>();
@@ -243,7 +246,7 @@ public class LibrarySystem {
 
     /**
      * Returns all users in the library.
-     * @return
+     * @return list of all users in the library.
      */
     public List<User> getAllUsers() {
         return users;
@@ -251,7 +254,7 @@ public class LibrarySystem {
 
     /**
      * Returns the logged-in user.
-     * @return
+     * @return the user who is logged in
      */
     public User getLoggedInUser() {
         return loggedInUser;
@@ -259,7 +262,7 @@ public class LibrarySystem {
 
     /**
      * Checks if there is a user logged in.
-     * @return
+     * @return true if there is a user logged in else false.
      */
     public boolean isUserLoggedIn() {
         return loggedInUser != null;
